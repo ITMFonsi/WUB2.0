@@ -378,7 +378,7 @@ methods: {
           this.editedItem = Object.assign({}, this.newCustomer)
           this.editedIndex = -1
         }, 300)
-      }
+      },
 },
 
   data () {

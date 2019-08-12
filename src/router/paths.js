@@ -28,5 +28,10 @@ export default [
     path: '/invoices',
     name: 'Invoices',
     view: 'Invoices'
+  },
+  {
+    path: '/userprofile',
+    name: 'Userprofile',
+    view: 'Userprofile'
   }
 ]
