@@ -10,7 +10,7 @@
     width="260"
   >
     <v-img
-      :src="image"
+      src="https://images.pexels.com/photos/2539658/pexels-photo-2539658.jpeg?cs=srgb&dl=architecture-black-and-white-buildings-2539658.jpg&fm=jpg"
       :gradient="sidebarOverlayGradiant"
       height="100%"
     >
@@ -21,16 +21,13 @@
       >
         <v-list-tile avatar>
           <v-list-tile-avatar
-            color="white"
+            color="green"
           >
-            <v-img
-              :src="logo"
-              height="34"
-              contain
-            />
+
+            <v-icon height="34" contain>mdi-ev-station</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            WUBS 2.0
+            WUBS
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -72,12 +69,12 @@ import {
 
 export default {
   data: () => ({
-    logo: './img/vuetifylogo.png',
+    logo: './img/vuetifylogasdo.png',
     links: [
       {
         to: '/dashboard',
         icon: 'mdi-view-dashboard',
-        text: 'My Business'
+        text: 'Dashboard'
       },
       {
         to: '/customers',
@@ -88,11 +85,6 @@ export default {
         to: '/products',
         icon: 'mdi-archive',
         text: 'Products'
-      },
-      {
-        to: '/services',
-        icon: 'mdi-worker',
-        text: 'Services'
       },
       {
         to: '/invoices',

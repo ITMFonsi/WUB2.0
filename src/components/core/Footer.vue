@@ -35,8 +35,7 @@ export default {
       { name: 'My Business', Link: '/dashboard' },
       { name: 'Customers', Link: '/customers' },
       { name: 'Products', Link: '/products' },
-      { name: 'Services', Link: '/services' },
-      { name: 'Invoices', Link: '/invoices' }
+      { name: 'Invoices', Link: '/invoices' },
     ]
   })
 }

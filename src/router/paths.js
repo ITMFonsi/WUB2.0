@@ -12,26 +12,21 @@ export default [
   {
     path: '/customers',
     name: 'Customers',
-    view: 'Customers'
+    view: 'Customers',
   },
   {
     path: '/products',
     name: 'Products',
-    view: 'Products'
-  },
-  {
-    path: '/services',
-    name: 'Services',
-    view: 'Services'
+    view: 'Products',
   },
   {
     path: '/invoices',
     name: 'Invoices',
-    view: 'Invoices'
+    view: 'InvoiceList',
   },
   {
-    path: '/userprofile',
-    name: 'Userprofile',
-    view: 'Userprofile'
+    path: '/newinvoice',
+    name: 'Invoices',
+    view: 'Invoices',
   }
 ]

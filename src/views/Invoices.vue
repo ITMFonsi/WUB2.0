@@ -10,8 +10,7 @@
 
 <template>
   <v-layout column align-center>
-          <h3>Invoice Details</h3>
-
+    <h3>Invoice Details</h3>
       <v-autocomplete
         :items="customers"
         item-text="name"
@@ -21,7 +20,7 @@
         >
         </v-autocomplete>
 
-                    <v-text-field
+      <v-text-field
         v-model="newInvoice.invoiceNumber"
         :rules="invoiceNumberRules"
         label="Invoice #"
@@ -40,6 +39,7 @@
       ></v-text-field>
 
       <v-checkbox
+        color="green"
         v-model="newInvoice.invoiceOpen"
         label="Invoice paid"
         required
@@ -48,8 +48,7 @@
       <v-flex
         xs6
       >
-      <v-btn color="green">Save</v-btn>
-      <v-btn color="blue">Print</v-btn>
+      <v-btn color="green" @click="postInvoice">Save</v-btn>
       </v-flex>
 
   </v-layout>
@@ -134,59 +133,58 @@
         </material-card>
     </modal>
 
-    <v-flex
-        xs9
-      >
-       <material-card class="v-card-profile" style="margin-left:10px">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="auto"
-          >
-            
-          </v-avatar>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">Invoicing Party</h6>
-            <h4 class="card-title font-weight-light"> {{ profile.name }} </h4>
-            <p class="card-description font-weight-light">{{ profile.address }}</p>
-            <p class="card-description font-weight-light">{{ profile.zip }} {{ profile.city }}</p>
-            <p class="card-description font-weight-light">{{ profile.country }}</p>
-          </v-card-text>
-        </material-card>
-        <material-card class="v-card-profile" style="margin-left:10px">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="auto"
-          >
-            
-          </v-avatar>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">Invoice Recipient</h6>
-            <h4 class="card-title font-weight-light"> {{ selectedCustomers.name }} </h4>
-            <p class="card-description font-weight-light">{{ selectedCustomers.address }}</p>
-            <p class="card-description font-weight-light">{{ selectedCustomers.zip }} {{ selectedCustomers.city }}</p>
-            <p class="card-description font-weight-light">{{ selectedCustomers.country }}</p>
-          </v-card-text>
-        </material-card>
-        <material-card class="v-card-profile" style="margin-left:10px">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="auto"
-          >
-            
-          </v-avatar>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">Invoice Totals</h6>
-            <h4 class="card-title font-weight-light">Totals</h4>
-            <p class="card-description font-weight-light">Total without Tax: {{ newInvoice.invoiceTotalBeforeTax }} €</p>
-            <p class="card-description font-weight-light">Tax (20% USt.): {{ newInvoice.invoiceTaxSum }} €</p>
-            <p class="card-description font-weight-light">Total: {{ newInvoice.invoiceTotal }} €</p>
-          </v-card-text>
-        </material-card>
-      </v-flex>
+<v-flex>
 
+<v-item-group>
+   <h3 class="text-xs-center">Invoice: {{ newInvoice.invoiceNumber }}</h3>
+    <v-container grid-list-md>
+      <v-layout wrap>
+          <v-item>
+            <v-flex xs4>
+                <material-card class="v-card-profile">
+                  <v-avatar
+                    slot="offset"
+                    class="mx-auto d-block"
+                    size="auto"
+                  >
+                    
+                  </v-avatar>
+                  <v-card-text class="text-xs-center">
+                    <h6 class="category text-gray font-weight-thin mb-3">Invoice Recipient</h6>
+                    <h4 class="card-title font-weight-light"> {{ selectedCustomers.name }} </h4>
+                    <p class="card-description font-weight-light">{{ selectedCustomers.address }}</p>
+                    <p class="card-description font-weight-light">{{ selectedCustomers.zip }} {{ selectedCustomers.city }}</p>
+                    <p class="card-description font-weight-light">{{ selectedCustomers.country }}</p>
+                  </v-card-text>
+                </material-card>
+              </v-flex>
+          </v-item>
+
+          <v-item>
+            <v-flex xs4 offset-xs4>
+              <material-card class="v-card-profile offset-xs8">
+                <v-avatar
+                  slot="offset"
+                  class="mx-auto d-block"
+                  size="auto"
+                >
+                  
+                </v-avatar>
+                <v-card-text class="text-xs-center">
+                  <h6 class="category text-gray font-weight-thin mb-3">Invoice Issuer</h6>
+                  <h4 class="card-title font-weight-light"> {{ profile.name }} </h4>
+                  <p class="card-description font-weight-light">{{ profile.address }}</p>
+                  <p class="card-description font-weight-light">{{ profile.zip }} {{ profile.city }}</p>
+                  <p class="card-description font-weight-light">{{ profile.country }}</p>
+                </v-card-text>
+              </material-card>   
+            </v-flex>
+          </v-item>
+      </v-layout>
+    </v-container>
+  </v-item-group>
+  
+</v-flex>
  <v-flex
         md12
       >
@@ -233,7 +231,23 @@
 
 </material-card>
  </v-flex>
-
+<v-flex xs4 offset-xs8>
+  <material-card class="v-card-profile">
+          <v-avatar
+            slot="offset"
+            class="mx-auto d-block"
+            size="auto"
+          >
+            
+          </v-avatar>
+          <v-card-text class="text-xs-center">
+            <h6 class="category text-gray font-weight-thin mb-3">Invoice Totals</h6>
+            <p class="card-description font-weight-light">Total without tax: {{ newInvoice.invoiceTotalBeforeTax }} €</p>
+            <p class="card-description font-weight-light">Tax: {{ newInvoice.invoiceTaxSum }} €</p>
+            <p class="card-description font-weight-bold">Total: {{ newInvoice.invoiceTotal }} €</p>
+          </v-card-text>
+        </material-card>
+  </v-flex>
 
  <v-snackbar
               :color="color"
@@ -267,109 +281,114 @@
 
 <script>
   // axios test
-import axios from 'axios'
+import firebase from 'firebase'
+import Router from 'vue-router'
+import DBInvoices from '../database/Invoices'
+import DBCustomers from '../database/Customers'
+import DBProducts from '../database/Products'
+import DBProfile from '../database/Profile'
+import Invoice from '../models/Invoice'
+
 export default {
   
 methods: {
-    createLineItemModal () {
-        this.$modal.show('createLineItem');
-    },
-    hide () {
-        this.$modal.hide('createLineItem');
-    },
-        readCustomers: function() {
-        axios
-            .get('http://s645270104.online.de/api/customers.php?action=read')
-            .then(response => {
-            this.customers = response.data;
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    },
-
-    failed: function(text) {
-          this.color = "error";
-          this.notificationText = text;
-          this.bottom = true
-            this.snackbar = true;
-            this.hide();
-      },
-      success: function(text) {
-        this.color = "success";
-        this.notificationText = text;
-        this.bottom = true
-        this.snackbar = true;
-        this.hide();
-      },
-
-    readProducts: function() {
-    axios
-        .get('http://s645270104.online.de/api/products.php?action=read')
-        .then(response => {
-        this.products = response.data;
-        })
-        .catch(error => {
-        console.log(error)
-        })
-    },
-    readProfile: function() {
-    axios
-        .get('http://s645270104.online.de/api/profile.php?action=read')
-        .then(response => {
-        this.profile = response.data;
-        this.profile = this.profile[0];
-        this.loading = false
-        })
-        .catch(error => {
-        console.log(error)
-        })
+  createLineItemModal () {
+    this.$modal.show('createLineItem');
   },
-    addLineItem() {      
-        this.invoiceItems.push({ 
-            name: this.selectedProduct.name,  
-            price: this.selectedProduct.price,
-            quantity: this.selectedProduct.quantity,
-            discount: this.selectedProduct.discount,
-            total: ((this.selectedProduct.price * this.selectedProduct.quantity) * (1- (this.selectedProduct.discount / 100))).toFixed(2)
-        })
-        this.success("Line item added successfully!");
 
-        // calculate new invoice totals
-        this.calculateTotals();
-        // reset the line item
-        this.resetAddLineItem()
-      },
-    resetAddLineItem() {
-    this.selectedProduct = [];
-    },
-    deleteLineItem(index) {
-         this.invoiceItems.splice(index, 1);
-         this.calculateTotals();
-         this.failed("Line item deleted!");
-    },
-    calculateTotals() {
-        var invoice = this.invoiceItems;
-        var total = 0;
-        // tax percentage
-        var tax = 20;
+  hide () {
+    this.$modal.hide('createLineItem');
+  },
 
-        invoice.forEach(function(obj) {
-            total += parseFloat(obj.total);
-        });
-        // total calculations
-        this.newInvoice.invoiceTotalBeforeTax = total.toFixed(2);
+  readCustomers: function() {
+    this.customers = DBCustomers.getAllCustomers();
+  },
 
-        var taxSum = ((total /100) *  20).toFixed(2);
-        this.newInvoice.invoiceTaxSum = taxSum;
+  failed: function(text) {
+    this.color = "error";
+    this.notificationText = text;
+    this.bottom = true
+    this.snackbar = true;
+    this.hide();
+  },
 
-        var totalSum =  (parseFloat(total) + parseFloat(taxSum)).toFixed(2);
-        this.newInvoice.invoiceTotal = totalSum
-    },
+  success: function(text) {
+    this.color = "success";
+    this.notificationText = text;
+    this.bottom = true
+    this.snackbar = true;
+    this.hide();
+  },
 
-    createInvoice() {
-    
+  readProducts: function() {
+    this.products = DBProducts.getAllProducts();
+  },
+
+  getNewInvoiceNumber: async function() {
+    this.newInvoice.invoiceNumber = await DBInvoices.getNextInvoiceNumber();
+  },
+
+  readProfile: async function() {
+    this.profile = await DBProfile.getInvoicerDetails();
+  },
+
+  postInvoice: function() {
+    var success = DBInvoices.addInvoice(this.selectedCustomers, this.newInvoice, this.invoiceItems);
+    if (success) {
+      this.success("Invoice successfully created!");
+      this.$router.push('/invoices');
+    } else {
+      this.failed("Invoice could not be created!");
+      this.$router.push('/invoices');
     }
+  },
+
+  addLineItem() {      
+    this.invoiceItems.push({ 
+      name: this.selectedProduct.name,  
+      price: this.selectedProduct.price,
+      quantity: this.selectedProduct.quantity,
+      discount: this.selectedProduct.discount,
+      total: ((this.selectedProduct.price * this.selectedProduct.quantity) * (1- (this.selectedProduct.discount / 100))).toFixed(2)
+    })
+    this.success("Line item added successfully!");
+
+    // calculate new invoice totals
+    this.calculateTotals(this.selectedProduct.taxPercentage);
+    // reset the line item
+    this.resetAddLineItem()
+  },
+
+  resetAddLineItem() {
+  this.selectedProduct = [];
+  },
+
+  deleteLineItem(index) {
+    this.invoiceItems.splice(index, 1);
+    this.calculateTotals();
+    this.failed("Line item deleted!");
+  },
+
+  calculateTotals(tax) {
+    var invoice = this.invoiceItems;
+    var total = 0;
+    // tax percentage
+    if (tax == 'undefined') {
+      tax = 1;
+    }
+
+    invoice.forEach(function(obj) {
+      total += parseFloat(obj.total);
+    });
+    // total calculations
+    this.newInvoice.invoiceTotalBeforeTax = total.toFixed(2);
+
+    var taxSum = ((total /100) * tax).toFixed(2);
+    this.newInvoice.invoiceTaxSum = taxSum;
+
+    var totalSum =  (parseFloat(total) + parseFloat(taxSum)).toFixed(2);
+    this.newInvoice.invoiceTotal = totalSum
+  }
 },
 
   data () {
@@ -411,13 +430,12 @@ methods: {
         sortable: false 
         }
       ],
-
         profile:[],
         products: [],
         customers: [],
 
-        selectedCustomers:[],
-        selectedProduct: {name:'', price:'', quantity:'', discount:'', total:''},
+        selectedCustomers:{},
+        selectedProduct: {name:'', price:'', quantity:'1', discount:'0', total:''},
 
         newInvoice: {
             invoiceCustomer: '',
@@ -431,7 +449,7 @@ methods: {
         },
         invoiceItems: [],
 
-        color: null,
+      color: null,
       colors: [
       'purple',
       'info',
@@ -448,9 +466,9 @@ methods: {
    mounted () {
     this.selectedCustomers.address = 'Select a customer!'; 
     this.readProfile();
+    this.getNewInvoiceNumber();
     this.readCustomers();
     this.readProducts();
-    this.createInvoice();
   }
 }
 </script>

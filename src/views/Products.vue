@@ -9,139 +9,297 @@
     >
 
         <v-dialog v-model="dialog" max-width="500px">
-          <v-card>
-            <v-card-title>
+<v-card>
+  <v-card-title class="text-center justify-center py-6">
               <span class="headline">Edit Product</span>
             </v-card-title>
-
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs6 sm6 md4>
-                    <v-text-field v-model="editedItem.product_nr" label="Product Number"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field v-model="editedItem.description" label="Description"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="green darken-1" text @click="save">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-
-
-<modal height="auto" name="detailsProduct">
-<v-flex
-        xs12
-        md4
-      >
-        <material-card class="v-card-profile">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="130"
-          >
-            <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
-            >
-          </v-avatar>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
-            <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
-            <v-btn
-              color="success"
-              round
-              class="font-weight-light"
-            >Follow</v-btn>
-          </v-card-text>
-        </material-card>
-      </v-flex>
-</modal>
-
-<modal height="auto" name="createProduct">
-        <material-card
-          color="green"
-          title="New Product"
-          text="Add a new product"
-        >
-          <v-form>
+    <v-tabs
+      background-color="deep-purple accent-4"
+      centered
+      icons-and-text
+>
+  <v-tab>
+    Gerneral
+    <v-icon>mdi-information</v-icon>
+  </v-tab>
+  <v-tab>
+    Tax
+     <v-icon>mdi-cash</v-icon>
+  </v-tab>
+    <v-tab>
+    Stock
+     <v-icon>mdi-clipboard-outline</v-icon>
+  </v-tab>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        
+<v-form>
             <v-container py-0>
               <v-layout wrap>
-                                  <v-flex
-                  xs12
+                <v-flex
+                  xs6
                   md4
                 >
                   <v-text-field
-                    class="purple-input"
                     label="Product Number"
-                    v-model="newProduct.product_nr"
+                    v-model="editedItem.product_nr"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Name"
-                    v-model="newProduct.name"
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    label="Description"
-                    class="purple-input"
-                    v-model="newProduct.description"
-                    />
                 </v-flex>
                 <v-flex
                   xs12
                   md12
                 >
                   <v-text-field
-                    label="Price"
-                    class="purple-input"
-                    v-model="newProduct.price"/>
+                    label="Name"
+                    v-model="editedItem.name"
+                  />
                 </v-flex>
                 <v-flex
                   xs12
-                  text-xs-right
+                  md12
                 >
-                  <v-btn
-                    class="mx-0 font-weight-light"
-                    color="green darken-1"
-                    v-on:click="addProduct"
-                  >
-                    Add Product
-                  </v-btn>
+                  <v-text-field
+                    label="Description"
+                    v-model="editedItem.description"
+                    />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Price (NET)"
+                    v-model="editedItem.price"/>
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Price (GROSS)"
+                    v-model="editedItem.priceGross"/>
+                </v-flex>
+
+              </v-layout>
+            </v-container>
+          </v-form>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs6
+                  md4
+                >
+                  <v-text-field
+                    class="purple-input"
+                    label="Tax %"
+                    v-model="editedItem.taxPercentage"
+                  />
                 </v-flex>
               </v-layout>
             </v-container>
           </v-form>
-        </material-card>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs6
+                  md4
+                >
+                  <v-text-field
+                    class="purple-input"
+                    label="Amount in stock"
+                    v-model="editedItem.inStock"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+
+
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+</v-tabs>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="close">Cancel</v-btn>
+              <v-btn color="green darken-1" text @click="save">Save</v-btn>
+            </v-card-actions>
+  </v-card>
+
+            
+        </v-dialog>
+</modal>
+
+<modal height="auto" name="createProduct">
+<v-card>
+    <v-card-title class="text-center justify-center py-6">
+              <span class="headline">New Product</span>
+    </v-card-title>
+    <v-tabs
+      background-color="deep-purple accent-4"
+      centered
+      icons-and-text
+>
+  <v-tab>
+    Gerneral
+    <v-icon>mdi-information</v-icon>
+  </v-tab>
+  <v-tab>
+    Tax
+     <v-icon>mdi-cash</v-icon>
+  </v-tab>
+    <v-tab>
+    Stock
+     <v-icon>mdi-clipboard-outline</v-icon>
+  </v-tab>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        
+<v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs6
+                  md4
+                >
+                  <v-text-field
+                    label="Product Number"
+                    v-model="newProduct.product_nr"
+                  />
+                </v-flex>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Name"
+                    v-model="newProduct.name"
+                  />
+                </v-flex>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Description"
+                    v-model="newProduct.description"
+                    />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Price (NET)"
+                    v-model="newProduct.price"/>
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Price (GROSS)"
+                    v-model="newProduct.priceGross"/>
+                </v-flex>
+
+              </v-layout>
+            </v-container>
+          </v-form>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs6
+                  md4
+                >
+                  <v-text-field
+                    class="purple-input"
+                    label="Tax %"
+                    v-model="newProduct.taxPercentage"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs6
+                  md4
+                >
+                  <v-text-field
+                    class="purple-input"
+                    label="Amount in stock"
+                    v-model="newProduct.inStock"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+
+
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+</v-tabs>
+<v-flex
+  xs12
+  text-xs-right
+>
+               
+<v-btn
+  class="mx-0 font-weight-light"
+  color="green darken-1"
+  v-on:click="addProduct"
+>
+<v-icon left>mdi-playlist-plus</v-icon>
+  Add Product
+</v-btn>
+ </v-flex>
+  </v-card>
+
     </modal>
 
       <v-flex
         md12
       >
         <v-layout>
-            <v-flex xs4 order-md1 order-xs3>
+            <v-flex xl4 xs4 order-md1 order-xs3>
                 <v-card
                     color="green"
                     dark
@@ -151,7 +309,9 @@
                     Click here to add a new product.
                     </v-card-text>
                     <v-card-actions>
-                    <v-btn color="green darken-3" @click="createProductModal" text>Add Product</v-btn>
+                    <v-btn class="ma-2" tile outlined color="green darken-3" @click="createProductModal">
+                      <v-icon left>mdi-playlist-plus</v-icon> Add product
+                    </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -167,9 +327,20 @@
           text="List of all products"
 
         >
+        <v-flex
+              xs4
+        md4
+      >
+              <v-text-field
+              append-icon="mdi-magnify"
+        v-model="search"
+        label="Search product..."
+      ></v-text-field>
+            </v-flex>
           <v-data-table
             :headers="headers"
             :items="items"
+            :search="search"
             loading-text="Loading... Please wait"
           >
             <template
@@ -192,6 +363,7 @@
                 
                   <v-icon
                     small
+                    color="orange"
                     class="mr-2"
                     @click="editItem(item)"
                     >
@@ -199,6 +371,7 @@
                     </v-icon>
                     <v-icon
                         small
+                        color="red"
                         class="mr-2"
                         @click="deleteItem(item)"
                     >
@@ -241,121 +414,116 @@
 </template>
 
 <script>
-  // axios test
-import axios from 'axios'
+import DBProducts from '../database/Products'
+import Product from '../models/Product'
+
 export default {
 methods: {
-  createProductModal () {
-    this.$modal.show('createProduct');
-  },
-  hide () {
-    this.$modal.hide('createProduct');
-  },
-  readProducts: function() {
-    axios
-        .get('http://s645270104.online.de/api/products.php?action=read')
-        .then(response => {
-        this.items = response.data;
-        this.loading = false
-        })
-        .catch(error => {
-        console.log(error)
-        })
-  },
+createProductModal () {
+  this.$modal.show('createProduct');
+},
+hide () {
+  this.$modal.hide('createProduct');
+},
 
-  addProduct: function () {
-        var formData = this.toFormData(this.newProduct);
-        var me = this;
+readProducts: function() {
+  this.items = DBProducts.getAllProducts();
+},
 
-  		axios.post('http://s645270104.online.de/api/products.php?action=create', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                app.errorMessage = response.data.message;
-                me.failed("Product could not be added!");
-  			} else {
-                app.successMessage = response.data.message;
-                me.success("Product added successfully!");
-  			}
-          });
+addProduct: function () {
+  var newProduct = new Product();
+  newProduct.setProduct_nr(this.newProduct.product_nr)
+  newProduct.setName(this.newProduct.name)
+  newProduct.setDescription(this.newProduct.description)
+  newProduct.setPrice(this.newProduct.price)
+  newProduct.setPriceGross(this.newProduct.priceGross)
+  newProduct.setTaxPercentage(this.newProduct.taxPercentage)
+  newProduct.setInStock(this.newProduct.inStock)
 
-      },
+  var success = DBProducts.addProduct(newProduct);
+  if (success) {
+    this.success("Product successfully added!");
+  } else {
+    this.failed("Product could not be added!")
+  }
+},
 
-      updateProduct: function () {
-        var me = this;
-        var formData = this.toFormData(this.editedItem);
-  		axios.post('http://s645270104.online.de/api/products.php?action=update', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                  app.errorMessage = response.data.message;
-                  me.failed("Could not update product");
-                  me.dialog = false;
-  			} else {
-                  app.successMessage = response.data.message;
-                  me.success("Updated product successfully!");
-                  me.dialog = false;
-  			}
-  		});
-      },
+updateProduct: function () {
+  var toEdit = new Product();
+    
+  toEdit.setId(this.editedItem.id);
+  toEdit.setProduct_nr(this.editedItem.product_nr);
+  toEdit.setName(this.editedItem.name);
+  toEdit.setDescription(this.editedItem.description);
+  toEdit.setPrice(this.editedItem.price);
+  toEdit.setPriceGross(this.editedItem.priceGross);
+  toEdit.setTaxPercentage(this.editedItem.taxPercentage);
+  toEdit.setInStock(this.editedItem.inStock);
+
+  var success = DBProducts.updateProduct(toEdit);
+  if (success) {
+    this.success("Product edited successfully!");
+    this.dialog = false;
+  } else {
+    this.failed("Product could not be edited!");
+    this.dialog = false;
+  }
+},
+
+deleteProduct: function (toDelete) {
+  var success = DBProducts.deleteProduct(toDelete);
+  if (success) {
+    this.success("Product successfully deleted!");
+  } else {
+    this.failed("Product could not be deleted!");
+  }
+},
       
-      deleteProduct: function (toDelete) {
-        var me = this;
-        var formData = this.toFormData(toDelete);
-  		axios.post('http://s645270104.online.de/api/products.php?action=delete', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                  app.errorMessage = response.data.message;
-                  me.failed("Could not delete Product");
-  			} else {
-  				app.successMessage = response.data.message;
-  				me.success("Product deleted successfully!");
-  			}
-  		})
-  	},
-      
-      toFormData: function (obj) {
-  		var form_data = new FormData();
-  		for (var key in obj) {
-  			form_data.append(key, obj[key]);
-  		}
-  		return form_data;
-      },
-    failed: function(text) {
-          this.color = "error";
-          this.notificationText = text;
-          this.bottom = true
-            this.snackbar = true;
-            this.hide();
-            this.readProducts();
-      },
-      success: function(text) {
-        this.color = "success";
-        this.notificationText = text;
-        this.bottom = true
-        this.snackbar = true;
-        this.hide();
-        this.readProducts();
-      },
-      editItem: function(item) {
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-      deleteItem: function(item) {
-        confirm('Are you sure you want to delete this product?') && this.deleteProduct(item);
-      },
-      save: function() {
-          this.updateProduct();
-      },
-      close: function() {
-          this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.newProduct)
-          this.editedIndex = -1
-        }, 300)
-      }
+failed: function(text) {
+  this.color = "error";
+  this.notificationText = text;
+  this.bottom = true
+  this.snackbar = true;
+  this.hide();
+  this.readProducts();
+},
+
+success: function(text) {
+  this.color = "success";
+  this.notificationText = text;
+  this.bottom = true
+  this.snackbar = true;
+  this.hide();
+  this.readProducts();
+},
+
+editItem: function(item) {
+  this.editedItem = Object.assign({}, item)
+  this.dialog = true
+},
+
+deleteItem: function(item) {
+  confirm('Are you sure you want to delete this product?') && this.deleteProduct(item);
+},
+
+save: function() {
+  this.updateProduct();
+},
+
+close: function() {
+  this.dialog = false
+setTimeout(() => {
+  this.editedItem = Object.assign({}, this.newProduct)
+  this.editedIndex = -1
+  }, 300)
+}
+
 },
 
   data () {
+
     return {
+      search:'',
          headers: [
         {
           sortable: true,
@@ -369,7 +537,7 @@ methods: {
         },
         {
           sortable: true,
-          text: 'Price',
+          text: 'Price (NET)',
           value: 'price'
         },
         { 
@@ -383,14 +551,20 @@ methods: {
           product_nr: "",
           name: "",
           description: "",
-          price: ""
+          price: "",
+          priceGross: '',
+          taxPercentage: '',
+          inStock: 0
       },
     editedItem: {
-            id: "",
+          id: "",
           product_nr: "",
           name: "",
           description: "",
-          price: ""
+          price: "",
+          priceGross: '',         
+          taxPercentage: '',
+          inStock: 0
       },
       loading: true,
       color: null,

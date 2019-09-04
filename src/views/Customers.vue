@@ -8,200 +8,37 @@
       wrap
     >
 
-        <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="detailDialog" max-width="800px">
           <v-card>
-            <v-card-title>
-              <span class="headline">Edit Customer</span>
-            </v-card-title>
+            <v-card-title class="text-center justify-center py-6">
+              <span class="headline">Customer Details</span>
+    </v-card-title>
 
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.phone1" label="Phone Number"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.mail" label="E-Mail"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.address" label="Adress"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.city" label="City"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.country" label="Country"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.zip" label="Postal Code"></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
+<v-flex xs8 md4 sm4
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+>
+<v-card 
+    class="mx-auto"
+    color="white"
+    width="200px"
+  >
+    <v-card-text class="text-xs-center">
+       <h4 class="card-title font-weight-light">{{editedItem.name}}</h4>
+            <p class="card-description font-weight-light">{{editedItem.address }}</p>
+            <p class="card-description font-weight-light">{{editedItem.zip }} {{editedItem.city }}</p>
+            <p class="card-description font-weight-light">{{editedItem.country }}</p>
+    </v-card-text>
+  </v-card>
+</v-flex>
 
-<modal height="auto" name="detailsCustomer">
-<v-flex
-        xs12
-        md4
-      >
-        <material-card class="v-card-profile">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="130"
-          >
-            <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
-            >
-          </v-avatar>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
-            <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
-            <v-btn
-              color="success"
-              round
-              class="font-weight-light"
-            >Follow</v-btn>
-          </v-card-text>
-        </material-card>
-      </v-flex>
-</modal>
-
-<modal height="auto" name="createCustomer">
-        <material-card
-          color="green"
-          title="New Customer"
-          text="Add a new customer"
-        >
-          <v-form>
-            <v-container py-0>
-              <v-layout wrap>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Name"
-                    v-model="newCustomer.name"
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Phone Number"
-                    v-model="newCustomer.phone1"
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    label="Email Address"
-                    class="purple-input"
-                    v-model="newCustomer.mail"
-                    />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md12
-                >
-                  <v-text-field
-                    label="Adress"
-                    class="purple-input"
-                    v-model="newCustomer.address"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="City"
-                    class="purple-input"
-                    v-model="newCustomer.city"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="Country"
-                    class="purple-input"
-                    v-model="newCustomer.country"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    class="purple-input"
-                    label="Postal Code"
-                    type="number"
-                    v-model="newCustomer.zip"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  text-xs-right
-                >
-                  <v-btn
-                    class="mx-0 font-weight-light"
-                    color="success"
-                    v-on:click="addCustomer"
-                  >
-                    Add Customer
-                  </v-btn>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-form>
-        </material-card>
-    </modal>
-
-      <v-flex
-        md12
-      >
-        <v-layout>
-            <v-flex xs4 order-md1 order-xs3>
-                <v-card
-                    color="green"
-                    dark
-                    >
-                <v-card-text class="white--text">
-                    <div class="headline mb-2">New Customer</div>
-                    Click here to add a new customer.
-                    </v-card-text>
-                    <v-card-actions>
-                    <v-btn color="green darken-3" @click="createCustomerModal" text>Add Customer</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </v-flex>
-
-      <v-flex
-        md12
-      >
        <material-card
           color="green"
-          title="Customers"
-          text="List of all customers"
+          title="Invoices"
+          text="Customers invoices"
         >
           <v-data-table
-            :headers="headers"
-            :items="items"
+            :headers="headersInvoice"
+            :items="customerInvoices"
             loading-text="Loading... Please wait"
           >
             <template
@@ -217,17 +54,347 @@
               slot="items"
               slot-scope="{ index, item }"
             >
-              <td>{{ item.id }}</td>
+              <td>{{ item.invoiceDueDate }}</td>
+              <td>{{ item.invoiceNumber }}</td>
+              <td>{{ item.invoiceCustomer.name }}</td>
+              <td>{{ item.invoiceTotal - item.invoiceSumPaid }} €</td>
+            </template>
+          </v-data-table>
+
+        </material-card>
+          </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="dialog" max-width="800px">
+<v-card>
+    <v-card-title class="text-center justify-center py-6">
+              <span class="headline">Edit Customer</span>
+    </v-card-title>
+    <v-tabs
+      background-color="deep-purple accent-4"
+      centered
+      icons-and-text
+>
+  <v-tab>
+    Gerneral
+    <v-icon>mdi-information</v-icon>
+  </v-tab>
+    <v-tab>
+    Other
+     <v-icon>mdi-dots-horizontal</v-icon>
+  </v-tab>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Name"
+                    v-model="editedItem.name"
+                  />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Phone Number"
+                    v-model="editedItem.phone1"
+                  />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Email Address"
+                    v-model="editedItem.mail"
+                    />
+                </v-flex>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Adress"
+                    v-model="editedItem.address"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="City"
+                    v-model="editedItem.city"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="Country"
+                    v-model="editedItem.country"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="Postal Code"
+                    type="number"
+                    v-model="editedItem.zip"/>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Comments"
+                    v-model="editedItem.comments"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+</v-tabs>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="close">Cancel</v-btn>
+              <v-btn color="green darken-1" text @click="save">Save</v-btn>
+            </v-card-actions>
+  </v-card>
+
+        </v-dialog>
+
+<modal height="auto" name="createCustomer">
+
+<v-card>
+    <v-card-title class="text-center justify-center py-6">
+              <span class="headline">New Customer</span>
+    </v-card-title>
+    <v-tabs
+      background-color="deep-purple accent-4"
+      centered
+      icons-and-text
+>
+  <v-tab>
+    Gerneral
+    <v-icon>mdi-information</v-icon>
+  </v-tab>
+    <v-tab>
+    Other
+     <v-icon>mdi-dots-horizontal</v-icon>
+  </v-tab>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Name"
+                    v-model="newCustomer.name"
+                  />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Phone Number"
+                    v-model="newCustomer.phone1"
+                  />
+                </v-flex>
+                <v-flex
+                  xs6
+                  md6
+                >
+                  <v-text-field
+                    label="Email Address"
+                    v-model="newCustomer.mail"
+                    />
+                </v-flex>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Adress"
+                    v-model="newCustomer.address"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="City"
+                    v-model="newCustomer.city"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="Country"
+                    v-model="newCustomer.country"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                  <v-text-field
+                    label="Postal Code"
+                    type="number"
+                    v-model="newCustomer.zip"/>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex
+                  xs12
+                  md12
+                >
+                  <v-text-field
+                    label="Comments"
+                    v-model="newCustomer.comments"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+      </v-card-text>
+    </v-card>
+  </v-tab-item>  
+</v-tabs>
+<v-flex
+  xs12
+  text-xs-right
+>
+               
+<v-btn
+  class="mx-0 font-weight-light"
+  color="success"
+  v-on:click="addCustomer"
+>
+<v-icon left>mdi-account-plus</v-icon> Add customer
+</v-btn>
+ </v-flex>
+  </v-card>
+    </modal>
+
+
+      <v-flex
+        md12
+      >
+        <v-layout>
+            <v-flex xl4 xs4 order-md1 order-xs3>
+                <v-card
+                    color="green"
+                    dark
+                    >
+                <v-card-text class="white--text">
+                    <div class="headline mb-2">New Customer</div>
+                    Click here to add a new customer.
+                    </v-card-text>
+                    <v-card-actions>
+                    <v-btn class="ma-2" tile outlined color="green darken-3" @click="createCustomerModal">
+                      <v-icon left>mdi-account-plus</v-icon> Add customer
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-flex>
+
+      <v-flex
+        md12
+      >
+
+       <material-card
+          color="green"
+          title="Customers"
+          text="List of all customers"
+        >
+              <v-flex
+              xs4
+        md4
+      >
+              <v-text-field
+              append-icon="mdi-magnify"
+        v-model="search"
+        label="Search customer..."
+      ></v-text-field>
+            </v-flex>
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            :search="search"
+            loading-text="Loading... Please wait"
+          >
+            <template
+              slot="headerCell"
+              slot-scope="{ header }"
+            >
+              <span
+                class="font-weight-light text-success text--darken-3"
+                v-text="header.text"
+              />
+            </template>
+            <template
+              slot="items"
+              slot-scope="{ index, item }"
+            >
               <td>{{ item.name }}</td>
+              <td>{{ item.mail }}</td>
+              <td>{{ item.phone1 }}</td>
               <td>
+                <v-icon
+                    small
+                    color="green"
+                    class="mr-2"
+                    @click="showItem(item)"
+                    >
+                        mdi-information
+                    </v-icon>
                   <v-icon
                     small
+                    color="orange"
                     class="mr-2"
                     @click="editItem(item)"
                     >
                         mdi-pencil
                     </v-icon>
                     <v-icon
+                        color="red"
                         small
                         @click="deleteItem(item)"
                     >
@@ -262,142 +429,173 @@
     </v-layout>
     
   </v-container>
-
-  
 </template>
 
 <script>
-  // axios test
-import axios from 'axios'
+import DBCustomers from '../database/Customers'
+import Customer from '../models/Customer'
+
 export default {
 methods: {
   createCustomerModal () {
     this.$modal.show('createCustomer');
   },
+
   hide () {
     this.$modal.hide('createCustomer');
   },
+
   readCustomers: function() {
-    axios
-        .get('http://s645270104.online.de/api/customers.php?action=read')
-        .then(response => {
-        this.items = response.data;
-        this.loading = false
-        })
-        .catch(error => {
-        console.log(error)
-        })
+    this.items = DBCustomers.getAllCustomers();
   },
 
-  addCustomer: function () {
-        var formData = this.toFormData(this.newCustomer);
-        var me = this;
+  addCustomer: function() {
+    var newCustomer = new Customer();
 
-  		axios.post('http://s645270104.online.de/api/customers.php?action=create', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                app.errorMessage = response.data.message;
-                me.failed("Customer could not be added!");
-  			} else {
-                app.successMessage = response.data.message;
-                me.success("Customer added successfully!");
-  			}
-          });
+    newCustomer.setName(this.newCustomer.name);
+    newCustomer.setMail(this.newCustomer.mail);
+    newCustomer.setPhone1(this.newCustomer.phone1);
+    newCustomer.setAddress(this.newCustomer.address);
+    newCustomer.setCity(this.newCustomer.city);
+    newCustomer.setZip(this.newCustomer.zip);
+    newCustomer.setCountry(this.newCustomer.country);
+    newCustomer.setComments(this.newCustomer.comments);
 
-      },
+    var success = DBCustomers.addCustomer(newCustomer);
+    if (success) {
+      this.success("Customer successfully added!");
+    } else {
+      this.failed("Customer could not be added!")
+    }
+    
+  },
 
-      updateCustomer: function () {
-        var me = this;
-        var formData = this.toFormData(this.editedItem);
-        console.log(this.editedItem);
-  		axios.post('http://s645270104.online.de/api/customers.php?action=update', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                  app.errorMessage = response.data.message;
-                  me.failed("Could not update customer");
-                  me.dialog = false;
-  			} else {
-                  app.successMessage = response.data.message;
-                  me.success("Updated customer successfully!");
-                  me.dialog = false;
-  			}
-  		});
-      },
+  updateCustomer: function () {
+    var toEdit = new Customer();
+    toEdit.setId(this.editedItem.id);
+    toEdit.setName(this.editedItem.name);
+    toEdit.setMail(this.editedItem.mail);
+    toEdit.setPhone1(this.editedItem.phone1);
+    toEdit.setAddress(this.editedItem.address);
+    toEdit.setCity(this.editedItem.city);
+    toEdit.setZip(this.editedItem.zip);
+    toEdit.setCountry(this.editedItem.country);
+    toEdit.setComments(this.editedItem.comments);
+
+    var success = DBCustomers.updateCustomer(toEdit);
+    if (success) {
+      this.success("Customer edited successfully!");
+      this.dialog = false;
+    } else {
+      this.failed("Customer could not be edited!");
+      this.dialog = false;
+    }
+  },
       
-      deleteCustomer: function (toDelete) {
-        var me = this;
-        var formData = this.toFormData(toDelete);
-  		axios.post('http://s645270104.online.de/api/customers.php?action=delete', formData)
-  		.then(function (response) {
-  			if (response.data.error) {
-                  app.errorMessage = response.data.message;
-                  me.failed("Could not delete customer");
-  			} else {
-  				app.successMessage = response.data.message;
-  				me.success("Customer deleted successfully!");
-  			}
-  		})
-  	},
-      
-      toFormData: function (obj) {
-  		var form_data = new FormData();
-  		for (var key in obj) {
-  			form_data.append(key, obj[key]);
-  		}
-  		return form_data;
-      },
-    failed: function(text) {
-          this.color = "error";
-          this.notificationText = text;
-          this.bottom = true
-            this.snackbar = true;
-            this.hide();
-            this.readCustomers();
-      },
-      success: function(text) {
-        this.color = "success";
-        this.notificationText = text;
-        this.bottom = true
-        this.snackbar = true;
-        this.hide();
-        this.readCustomers();
-      },
-      editItem: function(item) {
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-      deleteItem: function(item) {
-        confirm('Are you sure you want to delete this customer?') && this.deleteCustomer(item);
-      },
-      save: function() {
-          this.updateCustomer();
-      },
-      close: function() {
-          this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.newCustomer)
-          this.editedIndex = -1
-        }, 300)
-      },
+  deleteCustomer: function (toDelete) {
+    var success = DBCustomers.deleteCustomer(toDelete);
+    if (success) {
+      this.success("Customer successfully deleted!");
+    } else {
+      this.failed("Customer could not be deleted!");
+    }
+  },
+
+  failed: function(text) {
+    this.color = "error";
+    this.notificationText = text;
+    this.bottom = true
+    this.snackbar = true;
+    this.hide();
+    this.readCustomers();
+  },
+  success: function(text) {
+    this.color = "success";
+    this.notificationText = text;
+    this.bottom = true
+    this.snackbar = true;
+    this.hide();
+    this.readCustomers();
+  },
+  showItem: function(item) {
+    this.editedItem = Object.assign({}, item)
+    // get customers items
+
+    this.customerInvoices = DBCustomers.getInvoiceForCustomer(item);
+    console.log(this.customerInvoices);
+    // get sums of invoices
+    var revenue = 0;
+    this.customerInvoices.map(function(obj){     
+      revenue += parseFloat(obj.invoiceTotal);    
+    });
+    this.CustomerRevenueSum = revenue.toFixed(2) + ' €';
+    this.detailDialog = true
+  },
+
+  editItem: function(item) {
+    this.editedItem = Object.assign({}, item)
+    this.dialog = true
+  },
+  deleteItem: function(item) {
+    confirm('Are you sure you want to delete this customer?') && this.deleteCustomer(item);
+  },
+  save: function() {
+      this.updateCustomer();
+  },
+  close: function() {
+      this.dialog = false
+    setTimeout(() => {
+      this.editedItem = Object.assign({}, this.newCustomer)
+      this.editedIndex = -1
+    }, 300)
+  },
 },
 
   data () {
     return {
+      search: '',
          headers: [
-        {
-          sortable: false,
-          text: '#',
-          value: 'id'
-        },
         {
           sortable: false,
           text: 'Name',
           value: 'name'
         },
+                {
+          sortable: false,
+          text: 'E-Mail',
+          value: 'mail'
+        },
+                {
+          sortable: false,
+          text: 'Phone',
+          value: 'phone1'
+        },
         { 
         text: 'Actions', 
         value: 'action', 
         sortable: false 
+        }
+      ],
+      headersInvoice: [
+                      {
+          sortable: true,
+          text: 'Due Date',
+          value: 'date'
+        },
+        {
+          sortable: false,
+          text: 'Invoice',
+          value: 'invoice'
+        },
+                {
+          sortable: false,
+          text: 'Customer',
+          value: 'customer',
+        },
+        {
+          sortable: false,
+          text: 'Balance Due',
+          value: 'total',
         }
       ],
       items: [],
@@ -408,7 +606,8 @@ methods: {
           address: "",
           city: "",
           zip: "",
-          country: ""
+          country: "",
+          comments:''
       },
     editedItem: {
             id: "",
@@ -418,8 +617,11 @@ methods: {
           address: "",
           city: "",
           zip: "",
-          country: ""
+          country: "",
+          comments:''
       },
+      customerInvoices: [],
+      CustomerRevenueSum: 0,
       loading: true,
       color: null,
       colors: [
@@ -432,7 +634,8 @@ methods: {
     bottom: false,
     notificationText: "",
     snackbar: false,
-    dialog: false
+    dialog: false,
+    detailDialog: false
     }
   },
   mounted () {
